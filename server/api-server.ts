@@ -31,7 +31,7 @@ Koa({ base: "/static" })
     if (ctx.request.method === "POST") {
       const body = await getBody(ctx.request)
       const buffer = Buffer.from(body, "base64")
-      await addFile(ctx.base + ctx.request.url, buffer)
+      await addFile(ctx.base + decodeURI(ctx.request.url), buffer)
       ctx.response.statusCode = 200
       ctx.response.statusMessage = "upload ok."
       ctx.response.end()
